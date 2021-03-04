@@ -1,0 +1,19 @@
+@import '~bootstrap/dist/css/bootstrap.css';
+
+#userSignalForTalking {
+  max-width: 10px;
+  max-height: 1vh;
+}
+
+#root{
+  height: 100vh;
+}
+
+.Mic {
+  max-width:4.5vh;
+  max-height:4.5vh;
+}
+
+.App {
+  height: 100vh;
+}
