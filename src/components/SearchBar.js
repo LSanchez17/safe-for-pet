@@ -2,12 +2,19 @@ import React, { useEffect, useState } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 
 const SearchBar = ({searchFn}) => {
-    let {transcript, resetTranscript} = useSpeechRecognition();
-    
     let [searchTerm, setSearchTerm] = useState(null);
     let [talking, setTalking] = useState(false);
     let [log, setTranscript] = useState(null);
+    let [testCommand, setTestCommand] = useState('');
 
+    const animalCommands = [
+        {
+            command: 'Can my * eat *',
+            callback: (animal, food) => setTestCommand(`animal:${animal}, food:${food}`)
+        }
+    ]
+
+    let {transcript, resetTranscript} = useSpeechRecognition({animalCommands});
 
     const handleChange = (evt) => {
         let {name, value} = evt.target;
@@ -41,6 +48,7 @@ const SearchBar = ({searchFn}) => {
         //a specific item
         if(talking){
             setTalking(false);
+            console.log(transcript)
             await SpeechRecognition.stopListening();
             return;
         }
@@ -76,6 +84,7 @@ const SearchBar = ({searchFn}) => {
                 </div>
                 <button className='m-2 btn btn-success rounded shadow' type='submit'>Search</button>
             </form> 
+            <h2>{testCommand}</h2>
         </div>
     );
 }
