@@ -9,8 +9,12 @@ const SearchBar = ({searchFn}) => {
 
     const animalCommands = [
         {
-            command: 'Can my * eat *',
-            callback: (animal, food) => setTestCommand(`animal:${animal}, food:${food}`)
+            command: 'Can my dog eat *',
+            callback: (food) => {setTestCommand(`food:${food}`)}
+        },
+        {
+            command: 'eat *',
+            callback: (food) => {setTestCommand(`food${food}`)}
         }
     ]
 
@@ -24,15 +28,26 @@ const SearchBar = ({searchFn}) => {
     const handleSubmit = (evt) => {
         evt.preventDefault();
         // console.log(searchTerm)
+        //if there is no voicelog, we have a text based input
         if(!log){
-            searchFn(searchTerm);
-            setSearchTerm(null);
-            return;
+            if(searchTerm){
+                searchFn(searchTerm);
+                setSearchTerm(null);
+                return;
+            }
+            else{
+                searchFn('', ['no search term input']);
+                return;
+            }
+        }
+        //voice input detected, so we search with voice content
+        if(log.length < 1){
+            searchFn('', ['no voice log input']);
         }
         searchFn({searchTerm: log});
         setSearchTerm(null);
         setTranscript(null);
-        console.log(talking, searchTerm, log)
+        // console.log(talking, searchTerm, log)
         return;
     }
 
@@ -48,7 +63,7 @@ const SearchBar = ({searchFn}) => {
         //a specific item
         if(talking){
             setTalking(false);
-            console.log(transcript)
+            // console.log(transcript);
             await SpeechRecognition.stopListening();
             return;
         }
@@ -77,8 +92,7 @@ const SearchBar = ({searchFn}) => {
                 <div>
                     <img className='Mic mr-n2' src='./microphone.png' alt='microphone' onClick={voiceTalk}></img>
                         {
-                            !talking ? '' : <div id='userSignalForTalking' className="spinner-grow text-danger ml-n3" role="status">
-                                                    <span className="sr-only">Loading...</span>
+                            !talking ? '' : <div id='userSignalForTalking' className="spinner-grow ml-n3" role="status">
                                                 </div>
                         }
                 </div>
