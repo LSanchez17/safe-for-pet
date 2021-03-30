@@ -5,20 +5,27 @@ const SearchBar = ({searchFn}) => {
     let [searchTerm, setSearchTerm] = useState(null);
     let [talking, setTalking] = useState(false);
     let [log, setTranscript] = useState(null);
-    let [testCommand, setTestCommand] = useState('');
+    //when wanting to test voice command pick up
+    // let [testCommand, setTestCommand] = useState('');
 
-    const animalCommands = [
+    const commands = [
         {
             command: 'Can my dog eat *',
-            callback: (food) => {setTestCommand(`food:${food}`)}
+            callback: (food) => {
+                // setTestCommand(`food: ${food}`)
+                    setTranscript({foodItem: food});
+                }
         },
         {
-            command: 'eat *',
-            callback: (food) => {setTestCommand(`food${food}`)}
+            command: 'eat :food',
+            callback: (food) => {
+                // ?setTestCommand(`food${food}`)
+                setTranscript({foodItem: food});    
+            }
         }
     ]
 
-    let {transcript, resetTranscript} = useSpeechRecognition({animalCommands});
+    let {transcript, resetTranscript} = useSpeechRecognition({commands});
 
     const handleChange = (evt) => {
         let {name, value} = evt.target;
@@ -44,7 +51,7 @@ const SearchBar = ({searchFn}) => {
         if(log.length < 1){
             searchFn('', ['no voice log input']);
         }
-        searchFn({searchTerm: log});
+        searchFn(log);
         setSearchTerm(null);
         setTranscript(null);
         // console.log(talking, searchTerm, log)
@@ -80,11 +87,11 @@ const SearchBar = ({searchFn}) => {
     return (
         <div>
             <form className='mx-auto form-group roudned text-center' onSubmit={handleSubmit}>
-                <label className='m-2 text-white form-group' htmlFor='searchTerm'><h5>Input your query:</h5></label>
+                <label className='m-2 text-white form-group' htmlFor='foodItem'><h5>Input your query:</h5></label>
                 <input className='m-1 input rounded shadow'
                        type='text'
-                       name='searchTerm' 
-                       id='searchTerm' 
+                       name='foodItem' 
+                       id='foodItem' 
                        placeholder='Enter your item...'
                        onChange={handleChange}>
                 </input>
@@ -98,7 +105,7 @@ const SearchBar = ({searchFn}) => {
                 </div>
                 <button className='m-2 btn btn-success rounded shadow' type='submit'>Search</button>
             </form> 
-            <h2>{testCommand}</h2>
+            {/* <h2>{testCommand}</h2> */}
         </div>
     );
 }

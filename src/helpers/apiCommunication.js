@@ -1,33 +1,31 @@
 import axios from 'axios';
 
-const URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
+const URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
 
 class AnimalApi {
-    //connects to the API itself with needed data/parameters
-    static async request(accessPoint, data={}, method='get'){
-        console.log(`API:${accessPoint}, data:${data}, method:${method}`);
-
-        const endPoint = `${URL}/${accessPoint}`;
-        const params = (method === 'get') ? data : {};
-
-        try{
-            return (await axios({endPoint, method, data, params}));
-        }
-        catch(e){
-            console.error('Connection misfire', e.respone);
-            let message = e.respponse.data.error.message;
-            throw Array.isArray(message) ? message : [message];
-        }
-    }
+    //connects to API endpoints
 
     static async getAllToxicFoods(){
-        let res = await this.request('dogs');
-        return res.foods;
+        try{
+            let res = await axios.get(`${URL}/dogs`);
+            return res.data;
+        }
+        catch(e){
+            let message = e.response.data.error.message;
+            throw [message];
+        }
     }
 
-    static async getSpecificFood(searchTerms){
-        let res = await this.request('dogs', searchTerms);
-        return res.answer;
+    static async getSpecificFood(searchTerm){
+        try{
+            let food = searchTerm.foodItem;
+            let res = await axios.get(`${URL}/dogs/${food}`);
+            return res.data;
+        }
+        catch(e){
+            let message = e.response.data.error.message;
+            throw [message];
+        }
     }
 }
 
