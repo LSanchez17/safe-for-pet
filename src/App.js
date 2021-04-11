@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import SearchBar from './components/SearchBar';
 import Answer from './components/Answer';
 import UserNotices from './components/UserNotices';
 import AnimalApi from './helpers/apiCommunication';
+import loggingApi from './helpers/loggingApi';
 import './styles/index.css';
 import SpeechRecognition from "react-speech-recognition";
 
@@ -13,19 +14,25 @@ function App() {
   const noSpeechSupport = SpeechRecognition.browserSupportsSpeechRecognition();
 
   const submitSearchTerm = async (term, errors = null) => {
-    console.log(term);
-    // call helper function here with term
-    // return data to answer, setAnswer is called
-    // console.log(term)
+    /* console.log(term);
+    * call helper function here with term
+    * return data to answer, setAnswer is called
+    *  console.log(term)
+    */
     if(errors){
       // console.log(errors)
       setWarnings(errors);
       return;
     }
     else{
-      setWarnings();
+      setWarnings(null);
+      setAnswer(null);
       try{
+        if(term.voiceLog){
+            await AnimalApi.sendVoiceLog(term.voiceLog);
+        }
         let apiResponse = await AnimalApi.getSpecificFood(term);
+        
         // console.log(apiResponse);
         setAnswer(apiResponse.food);
       }
@@ -34,6 +41,15 @@ function App() {
       }
     }
   }
+
+  useEffect(() => {
+    const logUserVisit = async () => {
+      loggingApi.logVisit();
+    }
+    //logs user's visit upon entering
+    //stores IP, and time last visited
+    logUserVisit();
+  },[])
 
   return (
     <div className='App bg-info h-100 rounded card justify-content-center shadow'>

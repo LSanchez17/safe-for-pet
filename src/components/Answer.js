@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Answer = ({food, poisonous, reference}) => {
-    let poisonousToText = poisonous ? 'toxic to your pet' : 'non-toxic to your pet';
+    let poisonousToText = poisonous ? 'toxic to your pet' : 'not toxic to your pet';
 
     return (
         <div className='alert alert-info rounded text-center card shadow mx-auto'>

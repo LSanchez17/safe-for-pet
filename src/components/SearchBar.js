@@ -13,14 +13,20 @@ const SearchBar = ({searchFn}) => {
             command: 'Can my dog eat *',
             callback: (food) => {
                 // setTestCommand(`food: ${food}`)
-                    setTranscript({foodItem: food});
+                    setTranscript({
+                        foodItem: food,
+                        voiceLog: log
+                    });
                 }
         },
         {
             command: 'eat :food',
             callback: (food) => {
                 // ?setTestCommand(`food${food}`)
-                setTranscript({foodItem: food});    
+                setTranscript({
+                    foodItem: food,
+                    voiceLog: log
+                });    
             }
         }
     ]
@@ -34,7 +40,7 @@ const SearchBar = ({searchFn}) => {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        // console.log(searchTerm)
+        // console.log(searchTerm, log)
         //if there is no voicelog, we have a text based input
         if(!log){
             if(searchTerm){
@@ -51,6 +57,7 @@ const SearchBar = ({searchFn}) => {
         if(log.length < 1){
             searchFn('', ['no voice log input']);
         }
+        console.log(log)
         searchFn(log);
         setSearchTerm(null);
         setTranscript(null);
