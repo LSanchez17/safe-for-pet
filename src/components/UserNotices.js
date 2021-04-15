@@ -1,6 +1,6 @@
 import React from 'react';
 
-const userNotices =({warnings}) => {
+const userNotices = ({warnings}) => {
     // console.log(warnings);
     return (
         <>
