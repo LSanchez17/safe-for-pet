@@ -4,10 +4,10 @@ import {link, NavLink} from 'react-router-dom';
 
 const NavBar = () => {
     return (
-        <nav className='bg-light shadow'>
-            <ul className='nav left nav-pills nav-fill'>
-                <NavLink className='rounded navbar-brand' to='/'>Can my pet eat that?</NavLink>
-                <NavLink className='rounded navbar-brand' to='/infographics'>Informational Data</NavLink>
+        <nav className='bg-white shadow m-2 p-2 rounded'>
+            <ul className='nav bg-white left nav-pills rounded nav-fill'>
+                <NavLink className='rounded navbar-brand bg-white shadow' to='/'>Can my pet eat that?</NavLink>
+                <NavLink className='rounded navbar-brand bg-white shadow' to='/infographics'>Informational Data</NavLink>
             </ul>
         </nav>
     )

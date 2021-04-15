@@ -52,7 +52,7 @@ function App() {
   },[])
 
   return (
-    <div className='App bg-info h-100 rounded card justify-content-center shadow'>
+    <div className='App bg-info h-100 m-2 p-2 rounded card justify-content-center shadow'>
       { !noSpeechSupport ? <h2>Your browser/system does not support the speech library</h2> : ''}
       <h3 className='rounded bg-primary text-white text-center jumbotron mx-auto shadow'>Is that safe for my pet to eat?</h3>
       <SearchBar searchFn={submitSearchTerm}/>
