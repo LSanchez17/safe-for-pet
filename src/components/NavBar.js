@@ -1,15 +1,15 @@
 import React from 'react';
 import { Nav } from 'react-bootstrap';
-import {link, NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 const NavBar = () => {
     return (
-        <nav className='bg-white shadow m-2 p-2 rounded'>
-            <ul className='nav bg-white left nav-pills rounded nav-fill'>
-                <NavLink className='rounded navbar-brand bg-white shadow' to='/'>Can my pet eat that?</NavLink>
-                <NavLink className='rounded navbar-brand bg-white shadow' to='/infographics'>Informational Data</NavLink>
+        <Nav className='bg-white shadow px-2'>
+            <ul className='nav bg-white m-2 px-0 left nav-pills rounded nav-fill'>
+                <NavLink className='rounded px-1 navbar-brand bg-white shadow' to='/'>Can my pet eat that?</NavLink>
+                <NavLink className='rounded px-1 navbar-brand bg-white shadow' to='/infographics'>Informational Data</NavLink>
             </ul>
-        </nav>
+        </Nav>
     )
 };
 

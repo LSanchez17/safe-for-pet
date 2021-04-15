@@ -15,5 +15,16 @@
 }
 
 .App {
-  height: 100vh;
+  height: 92.5vh;
+  margin: auto;
+  background:blue url('../img/background.jpg') center;
+  background-size: auto;
+  background-color: transparent;
+}
+
+.MissionStatement {
+  margin: 0;
+  color:violet;
+  background-color: hsl(300, 24%, 80%, 0.5);
+  background-color: 50%;
 }

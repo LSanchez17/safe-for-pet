@@ -19,14 +19,14 @@ function App() {
     * return data to answer, setAnswer is called
     *  console.log(term)
     */
+    setWarnings(null);
+    setAnswer(null);
     if(errors){
       // console.log(errors)
       setWarnings(errors);
       return;
     }
     else{
-      setWarnings(null);
-      setAnswer(null);
       try{
         if(term.voiceLog){
             await AnimalApi.sendVoiceLog(term.voiceLog);
@@ -52,13 +52,13 @@ function App() {
   },[])
 
   return (
-    <div className='App bg-info h-100 m-2 p-2 rounded card justify-content-center shadow'>
+    <div className='App ml-2 mr-2 rounded card shadow'>
       { !noSpeechSupport ? <h2>Your browser/system does not support the speech library</h2> : ''}
-      <h3 className='rounded bg-primary text-white text-center jumbotron mx-auto shadow'>Is that safe for my pet to eat?</h3>
+      <h3 className='MissionStatement rounded text-white text-center m-3 p-3 mx-auto shadow'>Is that safe for my pet to eat?</h3>
       <SearchBar searchFn={submitSearchTerm}/>
       {answer ? <Answer food={answer.foodname} poisonous={answer.poisonous} reference={answer.reference}/> : ''}
       <UserNotices warnings={listOfWarnings}/>
-      <footer className='text-center text-white'>
+      <footer className='pt-lg-5 text-center text-white'>
         <span><small>Icons from <a className='text-primary' href='flaticon.com'>flatIcon.com</a></small></span>
       </footer>
     </div>
