@@ -28,3 +28,13 @@
   background-color: hsl(300, 24%, 80%, 0.5);
   background-color: 50%;
 }
+
+.Dashboard {
+  margin: auto;
+  color: black;
+  background-color: hsl(36, 100%, 90%, .7);
+}
+
+.height-full {
+  height: 92.5vh;
+}

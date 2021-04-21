@@ -1,10 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Voices from './Voices';
+import Foods from './Foods';
+import AnimalApi from '../helpers/apiCommunication';
 
 const Dashboard = () => {
     //Data manipulation and displaying it fancyfully
+    const [voiceData, setVoiceData] = useState([]);
+    const [foodData, setFoodData] = useState([]);
+
+    useEffect( () => {
+        const fetchVoiceData = async () => {
+            //call api, get voice data for analysis
+            let voices = await AnimalApi.getVoiceLogs();
+
+            setVoiceData(voices);
+        };
+
+        fetchVoiceData();
+    }, []);
+
+    useEffect(() => {
+        const fetchFoodData = async () => {
+            let foods = await AnimalApi.getAllToxicFoods();
+
+            setFoodData(foods);
+        };
+
+        fetchFoodData();
+    }, []);
+
+
     return (
-        <div>
-            <h2>I am dashboard, data is me</h2>
+        <div className='Dashboard container-fluid height-full'>
+            <h2 className='text-center'>Voice Data from users queries</h2>
+            <Voices voices={voiceData} />
+            <h2 className='text-center'>All toxic foods for dogs</h2>
+            <Foods foods={foodData} />
         </div>
     )
 };

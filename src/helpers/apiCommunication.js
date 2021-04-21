@@ -43,6 +43,18 @@ class AnimalApi {
             throw [message];
         }
     }
+
+    static async getVoiceLogs(){
+        try{
+            let res = await axios.get(`${URL}/logs`);
+
+            return res.data;
+        }
+        catch(e){
+            let message = e.resposne.data.error.message;
+            throw [message];
+        }
+    }
 }
 
 export default AnimalApi;
