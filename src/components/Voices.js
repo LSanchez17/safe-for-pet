@@ -3,12 +3,12 @@ import React from 'react';
 const Voices = ({voices}) => {
     let viewVoices = voices.map(voice => {
         return (
-        <div>
-            <p>{voice.voice_log}</p>
+        <div className='card my-2'>
+            <p className='card-text'>{voice.voice_log}</p>
         </div>);
     });
     return (
-        <div>
+        <div className='card-columns'>
             {viewVoices}
         </div>
     )

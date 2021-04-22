@@ -28,6 +28,15 @@ const SearchBar = ({searchFn}) => {
                     voiceLog: log
                 });    
             }
+        },
+        {
+            command: 'eat *',
+            callback: (food) => {
+                setTranscript({
+                    foodItem: food,
+                    voiceLog: log
+                });
+            }
         }
     ]
 

@@ -31,11 +31,15 @@ const Dashboard = () => {
 
 
     return (
-        <div className='Dashboard container-fluid height-full'>
-            <h2 className='text-center'>Voice Data from users queries</h2>
-            <Voices voices={voiceData} />
-            <h2 className='text-center'>All toxic foods for dogs</h2>
-            <Foods foods={foodData} />
+        <div className='Dashboard container-fluid height-full my-2'>
+            <div className='jumbotron bg-white shadow p-1 my-2'>
+                <h2 className='text-center'>Voice data from users queries</h2>
+                <Voices voices={voiceData} />
+            </div>
+            <div className='jumbotron bg-white shadow p-1 my-2 '>
+                <h2 className='text-center'>All toxic foods for dogs</h2>
+                <Foods foods={foodData} />
+            </div>
         </div>
     )
 };
