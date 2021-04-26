@@ -1,19 +1,22 @@
 import React from 'react';
 
 const Foods = ({foods}) => {
-    let viewFoods = foods.map(food => {
+    let rows = foods.map(food => {
         return (
-        <div>
-            <h3>{food.animal}</h3>
-            <h2>{food.foodname}</h2>
-            <p>{food.poisonous}</p>
-            <p>{food.reference}</p>
-        </div>)
-    })
+            <tr>
+                <th>{food.animal}</th>
+                    <td>{food.foodname}</td>
+                    <td>{food.poisonous}</td>
+                    <td>{food.reference}</td>
+            </tr>
+            )
+    });
 
     return (
         <div>
-            {viewFoods}
+            <table className='table'>
+                {rows}
+            </table>
         </div>
     )
 };
