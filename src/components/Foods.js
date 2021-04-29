@@ -6,35 +6,49 @@ const Foods = ({foods}) => {
     let [displayedRows, setDisplayedRows] = useState();
 
     let rows = foods.map((food, idx) => {
+        console.log(food)
         return (
             <tr key={idx}>
-                <th>{food.animal}</th>
-                    <td>{food.foodname}</td>
-                    <td>{food.poisonous}</td>
-                    <td>{food.reference}</td>
+                <td>{food.animal}</td>
+                <td>{food.foodname}</td>
+                <td><a href={food.reference}>Source</a></td>
+                <td>{food.poisonous ? 'Yes' : 'No'}</td>
             </tr>
             )
     });
 
     const paginate = () => {        
-        setCurrentPage(currentPage+1);
-        setNewPage(newPage+1);
+        setCurrentPage(currentPage += 1);
+        setNewPage(newPage += 1);
 
-        if(currentPage*5 >= rows.length){
+        if(newPage*5 >= rows.length){
             document.querySelector('#next').classList = 'd-none';
         }
+        if(currentPage*5 >= 5){
+            document.querySelector('#back').classList = 'btn btn-warning';
+        }
 
-        console.log(currentPage, newPage);
+        setDisplayedRows(rows.slice(currentPage*5, newPage*5));
+    }
+
+    const goBack = () => {
+        setCurrentPage(currentPage -= 1);
+        setNewPage(newPage -= 1);
+
+        if(currentPage - 1 < 0){
+            document.querySelector('#back').classList = 'd-none';
+        }
+
         setDisplayedRows(rows.slice(currentPage*5, newPage*5));
     }
 
     const resetView = () => {
         //resets back to the beginning
-        setCurrentPage(currentPage * 0);
-        setNewPage(newPage * 0 + 1);
-        setDisplayedRows(rows.slice(currentPage*5, newPage*5));
-        console.log(currentPage, newPage);
-
+        setCurrentPage(0);
+        setNewPage(1);
+        setDisplayedRows(rows.slice(0, 5));
+        document.querySelector('#next').classList = 'btn btn-secondary';
+        document.querySelector('#back').classList = 'd-none';
     }
 
     const viewData = () => {
@@ -47,14 +61,20 @@ const Foods = ({foods}) => {
 
     return (
         <div>
-            <p>Current Records</p>
             <table className='table'>
                 <tbody>
+                <tr>
+                        <th scope="col">Animal</th>
+                        <th scope="col">Food</th>
+                        <th scope="col">Reference</th>
+                        <th scope="col">Poisonous?</th>
+                    </tr>
                     {displayedRows}
                 </tbody>
             </table>
             <button id='reset' className='d-none' onClick={resetView}>Reset Data</button>
-            <button id='next' className='d-none' onClick={paginate}>Next set of records</button>
+            <button id='next' className='d-none' onClick={paginate}>Next Page</button>
+            <button id='back' className='d-none' onClick={goBack}>Previous Page</button>
             <button id='show' className='btn btn-primary' onClick={viewData}>View Data</button>
         </div>
     )
