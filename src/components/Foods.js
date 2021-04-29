@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 const Foods = ({foods}) => {
     let [currentPage, setCurrentPage] = useState(0);
     let [newPage, setNewPage] = useState(1);
+    let [displayedRows, setDisplayedRows] = useState();
 
     let rows = foods.map((food, idx) => {
         return (
@@ -15,28 +16,46 @@ const Foods = ({foods}) => {
             )
     });
 
-    let [displayedRows, setDisplayedRows] = useState(rows.slice(currentPage*5, setNewPage*5));
-
     const paginate = () => {        
-            setCurrentPage(currentPage++);
-            setNewPage(newPage++);
+        setCurrentPage(currentPage+1);
+        setNewPage(newPage+1);
 
-            let startingPoint = currentPage *= 5;
-            let endOfSlice = newPage *= 5;
-            setDisplayedRows(rows.slice(startingPoint, endOfSlice));
+        if(currentPage*5 >= rows.length){
+            document.querySelector('#next').classList = 'd-none';
+        }
+
+        console.log(currentPage, newPage);
+        setDisplayedRows(rows.slice(currentPage*5, newPage*5));
     }
 
-    console.log(currentPage, newPage)
+    const resetView = () => {
+        //resets back to the beginning
+        setCurrentPage(currentPage * 0);
+        setNewPage(newPage * 0 + 1);
+        setDisplayedRows(rows.slice(currentPage*5, newPage*5));
+        console.log(currentPage, newPage);
+
+    }
+
+    const viewData = () => {
+        //views the initial rendering
+        setDisplayedRows(rows.slice(currentPage*5,newPage*5));
+        document.querySelector('#reset').classList = 'btn btn-danger';
+        document.querySelector('#next').classList = 'btn btn-secondary';
+        document.querySelector('#show').classList = 'd-none';
+    }
 
     return (
         <div>
-            <p>Showing the first 5 records</p>
+            <p>Current Records</p>
             <table className='table'>
                 <tbody>
                     {displayedRows}
                 </tbody>
             </table>
-            <button onClick={paginate}>Next set of records</button>
+            <button id='reset' className='d-none' onClick={resetView}>Reset Data</button>
+            <button id='next' className='d-none' onClick={paginate}>Next set of records</button>
+            <button id='show' className='btn btn-primary' onClick={viewData}>View Data</button>
         </div>
     )
 };
