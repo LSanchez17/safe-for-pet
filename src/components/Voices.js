@@ -1,9 +1,9 @@
 import React from 'react';
 
 const Voices = ({voices}) => {
-    let viewVoices = voices.map(voice => {
+    let viewVoices = voices.map((voice,idx) => {
         return (
-        <div className='card my-2'>
+        <div key={idx} className='card my-2'>
             <p className='card-text'>{voice.voice_log}</p>
         </div>);
     });
