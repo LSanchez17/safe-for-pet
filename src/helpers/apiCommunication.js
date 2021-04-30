@@ -5,9 +5,10 @@ const URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
 class AnimalApi {
     //connects to API endpoints
 
-    async getAllToxicFoods(){
+    static async getAllToxicFoods(){
         try{
             let res = await axios.get(`${URL}/dogs`);
+            
             return res.data;
         }
         catch(e){
@@ -41,7 +42,7 @@ class AnimalApi {
         }
     }
 
-    async getVoiceLogs(){
+    static async getVoiceLogs(){
         try{
             let res = await axios.get(`${URL}/logs`);
 
@@ -53,7 +54,7 @@ class AnimalApi {
         }
     }
 
-    async getTotalVisitors(){
+    static async getTotalVisitors(){
         try{
             let res = await axios.get(`${URL}/logs/users`);
 
@@ -71,11 +72,10 @@ class AnimalApi {
             let foods = await this.getAllToxicFoods();
             let visitors = await this.getTotalVisitors(); 
 
-            console.log(voices, foods, visitors)
             return {voices, foods, visitors};
         }
         catch(e){
-            let message = 'API needs attention, call Luis';
+            let message = `API needs attention, call Luis with this ${e}`;
             throw [message];
         }
     }

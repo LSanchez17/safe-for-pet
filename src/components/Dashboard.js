@@ -33,10 +33,12 @@ const Dashboard = () => {
     useEffect( () => {
         const fetchMyApi = async () => {
             let returnedData = await AnimalApi.dashBoard();
+            //watch your returned data to avoid inner nesting!
+            let numberVisits = returnedData.visitors.totalVisits.totalvisits;
 
             setVoiceData(returnedData.voices);
             setFoodData(returnedData.foods);
-            setVisitors(returnedData.visitors);
+            setVisitors(parseInt(numberVisits));
         };
 
         fetchMyApi();
@@ -45,7 +47,7 @@ const Dashboard = () => {
 
     return (
         <div className='Dashboard container-fluid height-full my-2'>
-            <h3></h3>
+            <h3 className='jumbotron bg-white shadow p-1 my-2'>We've had {visitors} visitors so far!</h3>
             <div className='jumbotron bg-white shadow p-1 my-2'>
                 <h4 className='text-center'>Voice data from users queries</h4>
                 <Voices voices={voiceData} />
