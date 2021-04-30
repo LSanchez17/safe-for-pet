@@ -6,7 +6,6 @@ const Foods = ({foods}) => {
     let [displayedRows, setDisplayedRows] = useState();
 
     let rows = foods.map((food, idx) => {
-        console.log(food)
         return (
             <tr key={idx}>
                 <td>{food.animal}</td>
@@ -25,7 +24,7 @@ const Foods = ({foods}) => {
             document.querySelector('#next').classList = 'd-none';
         }
         if(currentPage*5 >= 5){
-            document.querySelector('#back').classList = 'btn btn-warning';
+            document.querySelector('#back').classList = 'btn btn-warning btn-sm';
         }
 
         setDisplayedRows(rows.slice(currentPage*5, newPage*5));
@@ -47,15 +46,15 @@ const Foods = ({foods}) => {
         setCurrentPage(0);
         setNewPage(1);
         setDisplayedRows(rows.slice(0, 5));
-        document.querySelector('#next').classList = 'btn btn-secondary';
+        document.querySelector('#next').classList = 'btn btn-info btn-sm';
         document.querySelector('#back').classList = 'd-none';
     }
 
     const viewData = () => {
         //views the initial rendering
         setDisplayedRows(rows.slice(currentPage*5,newPage*5));
-        document.querySelector('#reset').classList = 'btn btn-danger';
-        document.querySelector('#next').classList = 'btn btn-secondary';
+        document.querySelector('#reset').classList = 'btn btn-danger btn-sm';
+        document.querySelector('#next').classList = 'btn btn-info btn-sm';
         document.querySelector('#show').classList = 'd-none';
     }
 
@@ -75,7 +74,7 @@ const Foods = ({foods}) => {
             <button id='reset' className='d-none' onClick={resetView}>Reset Data</button>
             <button id='next' className='d-none' onClick={paginate}>Next Page</button>
             <button id='back' className='d-none' onClick={goBack}>Previous Page</button>
-            <button id='show' className='btn btn-primary' onClick={viewData}>View Data</button>
+            <button id='show' className='btn btn-primary btn-sm' onClick={viewData}>View Data</button>
         </div>
     )
 };

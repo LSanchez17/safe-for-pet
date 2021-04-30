@@ -1,15 +1,10 @@
 import React from 'react';
 
 const Voices = ({voices}) => {
-    let viewVoices = voices.map((voice,idx) => {
-        return (
-        <div key={idx} className='card my-2'>
-            <p className='card-text'>{voice.voice_log}</p>
-        </div>);
-    });
+    let totalVoiceInput = voices.length;
     return (
-        <div className='card-columns'>
-            {viewVoices}
+        <div className='m-2 card-columns'>
+            <h2 className='card-text'>{totalVoiceInput} total voice inputs so far!</h2>
         </div>
     )
 };

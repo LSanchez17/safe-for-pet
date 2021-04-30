@@ -5,7 +5,7 @@ const URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
 class AnimalApi {
     //connects to API endpoints
 
-    static async getAllToxicFoods(){
+    async getAllToxicFoods(){
         try{
             let res = await axios.get(`${URL}/dogs`);
             return res.data;
@@ -31,10 +31,7 @@ class AnimalApi {
 
     static async sendVoiceLog(voiceData){
         try{
-            let res = await axios.post(`${URL}/logs/voice`, 
-                    {
-                        voiceLog: voiceData
-                    });
+            await axios.post(`${URL}/logs/voice`, { voiceLog: voiceData });
             
             return;
         }
@@ -44,14 +41,41 @@ class AnimalApi {
         }
     }
 
-    static async getVoiceLogs(){
+    async getVoiceLogs(){
         try{
             let res = await axios.get(`${URL}/logs`);
 
             return res.data;
         }
         catch(e){
-            let message = e.resposne.data.error.message;
+            let message = e.response.data.error.message;
+            throw [message];
+        }
+    }
+
+    async getTotalVisitors(){
+        try{
+            let res = await axios.get(`${URL}/logs/users`);
+
+            return res.data;
+        }
+        catch(e){
+            let message = e.response.data.error.message;
+            throw [message];
+        }
+    }
+
+    static async dashBoard(){
+        try{
+            let voices = await this.getVoiceLogs();
+            let foods = await this.getAllToxicFoods();
+            let visitors = await this.getTotalVisitors(); 
+
+            console.log(voices, foods, visitors)
+            return {voices, foods, visitors};
+        }
+        catch(e){
+            let message = 'API needs attention, call Luis';
             throw [message];
         }
     }
