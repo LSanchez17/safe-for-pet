@@ -22,9 +22,9 @@ const Dashboard = () => {
         };
 
         fetchMyApi();
-
-        loaded = visitors;
     }, [])
+
+    loaded = visitors;
 
     return (
         <div>
