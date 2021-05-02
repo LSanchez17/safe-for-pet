@@ -25,11 +25,10 @@ const Dashboard = () => {
 
     let loaded = visitors.length || 0;
 
-
     return (
         <div>
             {
-            loaded >= 1 ?
+            loaded > 0 ?
             <div className='Dashboard container-fluid height-full my-2'>
                 <h3 className='jumbotron bg-white shadow p-1 my-2'>We've had {visitors} visitors so far!</h3>
                 <div className='jumbotron bg-white shadow p-1 my-2'>
