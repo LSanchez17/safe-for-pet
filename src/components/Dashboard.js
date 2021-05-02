@@ -29,7 +29,7 @@ const Dashboard = () => {
     return (
         <div>
             {
-            loaded >= 2 ?
+            loaded >= 1 ?
             <div className='Dashboard container-fluid height-full my-2'>
                 <h3 className='jumbotron bg-white shadow p-1 my-2'>We've had {visitors} visitors so far!</h3>
                 <div className='jumbotron bg-white shadow p-1 my-2'>

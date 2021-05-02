@@ -63,6 +63,7 @@ function App() {
         <h2>As always, the use of this site is for fun, and is not a replacement for a veterinarian.  For any 
            emergency, please contact your nearest vet or emergency vet clinic.
         </h2>
+        <h2>To use voice search, please enable allow the site to use your microphone!</h2>
       </div>
       
       <footer className='pt-lg-5 text-center text-white'>
