@@ -58,6 +58,13 @@ function App() {
       <SearchBar searchFn={submitSearchTerm}/>
       {answer ? <Answer food={answer.foodname} poisonous={answer.poisonous} reference={answer.reference}/> : ''}
       <UserNotices warnings={listOfWarnings}/>
+
+      <div className='MissionStatement rounded text-white text-center m-3 p-3 m-auto shadow'>
+        <h2>As always, the use of this site is for fun, and is not a replacement for a veterinarian.  For any 
+           emergency, please contact your nearest vet or emergency vet clinic.
+        </h2>
+      </div>
+      
       <footer className='pt-lg-5 text-center text-white'>
         <span><small>Icons from <a className='text-primary' href='flaticon.com'>flatIcon.com</a></small></span>
       </footer>
