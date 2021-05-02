@@ -8,6 +8,7 @@ const Dashboard = () => {
     const [voiceData, setVoiceData] = useState([]);
     const [foodData, setFoodData] = useState([]);
     const [visitors, setVisitors] = useState(0);
+    let loaded = 0;
 
     useEffect( () => {
         const fetchMyApi = async () => {
@@ -21,9 +22,9 @@ const Dashboard = () => {
         };
 
         fetchMyApi();
-    }, [])
 
-    let loaded = visitors.length || 0;
+        loaded = visitors;
+    }, [])
 
     return (
         <div>
