@@ -8,7 +8,6 @@ const Dashboard = () => {
     const [voiceData, setVoiceData] = useState([]);
     const [foodData, setFoodData] = useState([]);
     const [visitors, setVisitors] = useState(0);
-    let loaded = 0;
 
     useEffect( () => {
         const fetchMyApi = async () => {
@@ -24,12 +23,10 @@ const Dashboard = () => {
         fetchMyApi();
     }, [])
 
-    loaded = visitors;
-
     return (
         <div>
             {
-            loaded > 0 ?
+            visitors > 0 ?
             <div className='Dashboard container-fluid height-full my-2'>
                 <h3 className='jumbotron bg-white shadow p-1 my-2'>We've had {visitors} visitors so far!</h3>
                 <div className='jumbotron bg-white shadow p-1 my-2'>
