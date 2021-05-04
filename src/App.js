@@ -44,7 +44,7 @@ function App() {
 
   useEffect(() => {
     const logUserVisit = async () => {
-      loggingApi.logVisit();
+      await loggingApi.logVisit();
     }
     //logs user's visit upon entering
     //stores IP, and time last visited
