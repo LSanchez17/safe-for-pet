@@ -2,11 +2,9 @@
 # Safe for Pet
 
 # a novel idea:
-What if you could simply ask, is X safe for my pet?  Well, here it is 
+Ever wonder if your pet can eat something? We'll wonder no more.  Simply search the food or ingredient and get your answer, right away.  Or browse through our current dataset and see which food is poisonous, to which animal, and where our source comes from.
 
 # Roadmap(In no particular order)
-* Currently supports dogs only
-* Build out API to support multi-animal(where data exists)
-* Source more data
-* Throttle incoming connections/requests to optimize user experiences
-* Alexa-support/voice support
+* Open routes up for any animal
+* Source more data with web scraping
+* Improve voice support on mobile
